@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import CardNav, { CardNavItem } from "../Components/CardNav/CardNav";
+import SmoothScroll from "../Components/SmoothScroll/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,12 +24,59 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const items: CardNavItem[] = [
+    {
+      label: "home.",
+      bgColor: "#39171033",
+      textColor: "#fff",
+      links: [
+        { label: "home", href: "#", ariaLabel: "Home" },
+        { label: "showcase", href: "#showcase", ariaLabel: "Showcase" },
+        { label: "features", href: "#features", ariaLabel: "Features" },
+        { label: "about", href: "#about", ariaLabel: "About" },
+      ],
+    },
+    {
+      label: "documentation.",
+      bgColor: "#78342633",
+      textColor: "#fff",
+      links: [
+        { label: "getting started", href: "#started", ariaLabel: "Getting Started" },
+        { label: "project structure", href: "#structure", ariaLabel: "Project Structure" },
+      ],
+    },
+    {
+      label: "contact.",
+      bgColor: "#FF654633",
+      textColor: "#fff",
+      links: [
+        { label: "email", href: "#email", ariaLabel: "Email us" },
+        { label: "portfolio", href: "#portfolio", ariaLabel: "Portfolio" },
+        { label: "linkedIn", href: "#linkedin", ariaLabel: "LinkedIn" },
+      ],
+    },
+  ];
+
+  // Using an SVG from the public folder as the logo path
+  // Render text logo instead of an image
+  const logoText = "edosh";
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <CardNav
+          logoText={logoText}
+          logoAlt="Company Logo"
+          items={items}
+          baseColor="#fff"
+          menuColor="#000"
+          buttonBgColor="#FF6546"
+          buttonTextColor="#fff"
+          ease="power3.out"
+          className="fixed"
+        />
+
+        <SmoothScroll ease={0.08}>{children}</SmoothScroll>
       </body>
     </html>
   );

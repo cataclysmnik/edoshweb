@@ -6,10 +6,21 @@ import ActionButton from "@/Components/Buttons/action";
 import { GoArrowUpRight } from "react-icons/go";
 import AnimatedContent from "@/Animations/AnimatedContent/AnimatedContent";
 import MagicBento from "@/Components/MagicBento/MagicBento";
+import Lenis from 'lenis'
 
 const handleAnimationComplete = () => {
   console.log('Animation completed!');
 };
+
+// Initialize Lenis
+const lenis = new Lenis({
+  autoRaf: true,
+});
+
+// Listen for the scroll event and log the event data
+lenis.on('scroll', (e) => {
+  console.log(e);
+});
 
 export default function Home() {
   return (

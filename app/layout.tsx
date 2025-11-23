@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CardNav, { CardNavItem } from "../Components/CardNav/CardNav";
-import SmoothScroll from "../Components/SmoothScroll/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,7 +75,7 @@ export default function RootLayout({
           className="fixed"
         />
 
-        <SmoothScroll ease={0.08}>{children}</SmoothScroll>
+        {children}
       </body>
     </html>
   );

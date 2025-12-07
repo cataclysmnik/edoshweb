@@ -264,13 +264,13 @@ const CardNav: React.FC<CardNavProps> = ({
             style={{ color: effectiveMenuColor }}
           >
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
-                isHamburgerOpen ? "translate-y-[4px] rotate-45" : ""
+              className={`hamburger-line w-[30px] h-[2px] bg-current transition-all duration-300 ease-in-out [transform-origin:center] ${
+                isHamburgerOpen ? "translate-y-[5px] rotate-45" : ""
               } group-hover:opacity-75`}
             />
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
-                isHamburgerOpen ? "-translate-y-[4px] -rotate-45" : ""
+              className={`hamburger-line w-[30px] h-[2px] bg-current transition-all duration-300 ease-in-out [transform-origin:center] ${
+                isHamburgerOpen ? "-translate-y-[5px] -rotate-45" : ""
               } group-hover:opacity-75`}
             />
           </div>

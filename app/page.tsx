@@ -6,6 +6,7 @@ import ActionButton from "@/Components/Buttons/action";
 import { GoArrowUpRight } from "react-icons/go";
 import AnimatedContent from "@/Animations/AnimatedContent/AnimatedContent";
 import MagicBento from "@/Components/MagicBento/MagicBento";
+import ScrollReveal from "@/TextAnimations/ScrollReveal";
 import { useEffect } from "react";
 
 const handleAnimationComplete = () => {
@@ -129,6 +130,47 @@ export default function Home() {
           />
         </AnimatedContent>
       </section>
+      
+      {/* About Section */}
+      <section id="about" className="relative min-h-screen py-20 px-4 md:px-8 lg:px-16 flex items-center justify-center">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <ScrollReveal
+            enableBlur={true}
+            baseOpacity={0.1}
+            baseRotation={0}
+            blurStrength={6}
+            containerClassName="text-center"
+            textClassName="text-zinc-400 font-light"
+          >
+            The command line doesn't have to be intimidating. edosh reimagines the terminal experience 
+            for those just starting their journey into Linux and system administration.
+          </ScrollReveal>
+
+          <ScrollReveal
+            enableBlur={true}
+            baseOpacity={0.1}
+            baseRotation={0}
+            blurStrength={6}
+            containerClassName="text-center"
+            textClassName="text-zinc-400 font-light"
+          >
+            Instead of cryptic error messages and trial-and-error learning, edosh provides clear guidance 
+            and context at every step. Understanding comes first, proficiency follows naturally.
+          </ScrollReveal>
+
+          <ScrollReveal
+            enableBlur={true}
+            baseOpacity={0.1}
+            baseRotation={0}
+            blurStrength={6}
+            containerClassName="text-center"
+            textClassName="text-zinc-400 font-light"
+          >
+            Built for learners who want to master the terminal with confidence, not confusion.
+          </ScrollReveal>
+        </div>
+      </section>
+
       <section id="features" className="relative min-h-screen py-20 px-4 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto space-y-32">
           

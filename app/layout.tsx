@@ -31,8 +31,8 @@ export default function RootLayout({
       links: [
         { label: "home", href: "#", ariaLabel: "Home" },
         { label: "showcase", href: "#showcase", ariaLabel: "Showcase" },
-        { label: "features", href: "#features", ariaLabel: "Features" },
         { label: "about", href: "#about", ariaLabel: "About" },
+        { label: "features", href: "#features", ariaLabel: "Features" },
       ],
     },
     {

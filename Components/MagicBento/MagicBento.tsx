@@ -83,7 +83,7 @@ const cardData: Array<BentoCardProps & { type?: string; extra?: any }> = [
     title: "Command Explanations",
     description: "Short, useful explanations for common commands",
     label: "Explain",
-    type: "tall",
+    type: "small",
     extra: {
       code: "$ explain ls",
       explanation:

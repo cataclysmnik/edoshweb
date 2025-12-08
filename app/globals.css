@@ -1,40 +1,3 @@
-/* Hide horizontal scrollbar in terminal commands section */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-/* ElegantExplodeText enhancements */
-.elegant-gradient-text {
-  background: linear-gradient(90deg, #FF6546 0%, #fff 50%, #FF6546 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: elegant-gradient-move 4s linear infinite;
-}
-
-@keyframes elegant-gradient-move {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-.elegant-glow {
-  filter: drop-shadow(0 0 16px #FF6546) drop-shadow(0 0 4px #fff);
-}
-
-.elegant-shimmer {
-  position: relative;
-  animation: elegant-shimmer 2s linear infinite;
-}
-
-@keyframes elegant-shimmer {
-  0% { text-shadow: 0 0 8px #FF6546, 0 0 2px #fff; }
-  50% { text-shadow: 0 0 24px #FF6546, 0 0 8px #fff; }
-  100% { text-shadow: 0 0 8px #FF6546, 0 0 2px #fff; }
-}
 @import "tailwindcss";
 
 :root {
@@ -61,6 +24,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scroll-padding-top: 80px; /* Offset for navbar height */
 }
 
 body {
@@ -104,11 +68,6 @@ html.scrolling::-webkit-scrollbar-thumb {
   opacity: 1;
 }
 
-/* Hide scrollbar when scrolling in transition section */
-html.scrolling-hidden::-webkit-scrollbar-thumb {
-  opacity: 0 !important;
-}
-
 /* Hide scrollbar during page transition */
 html.transitioning::-webkit-scrollbar-thumb {
   opacity: 0 !important;
@@ -119,10 +78,6 @@ html {
   scrollbar-color: rgba(255, 101, 70, 0) transparent;
   scrollbar-width: thin;
   transition: scrollbar-color 0.3s ease;
-}
-
-html.scrolling-hidden {
-  scrollbar-color: transparent transparent !important;
 }
 
 html.transitioning {

@@ -386,7 +386,7 @@ const CardNav: React.FC<CardNavProps> = ({
                               setTimeout(() => {
                                 const element = document.getElementById(hash);
                                 if (element) {
-                                  element.scrollIntoView({ behavior: 'smooth' });
+                                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                 }
                               }, 100);
                             } else if (hash) {
@@ -394,10 +394,10 @@ const CardNav: React.FC<CardNavProps> = ({
                               e.preventDefault();
                               const element = document.getElementById(hash);
                               if (element) {
-                                element.scrollIntoView({ behavior: 'smooth' });
+                                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               }
-                              // Update URL with hash
-                              window.history.pushState({}, '', `#${hash}`);
+                              // Update URL with hash using replaceState for cleaner history
+                              window.history.replaceState(null, '', `${targetPath}#${hash}`);
                             }
                           }
                         }}

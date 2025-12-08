@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { GoArrowUpRight } from "react-icons/go";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 type CardNavLink = {
   label: string;
@@ -52,6 +54,21 @@ const CardNav: React.FC<CardNavProps> = ({
   const navRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isInstallPage, setIsInstallPage] = useState(pathname === "/install");
+  
+  // Smooth animation when pathname changes
+  useEffect(() => {
+    const newIsInstallPage = pathname === "/install";
+    if (newIsInstallPage !== isInstallPage) {
+      // Add a small delay for smoother visual transition
+      const timer = setTimeout(() => {
+        setIsInstallPage(newIsInstallPage);
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [pathname, isInstallPage]);
 
   const calculateHeight = () => {
     const navEl = navRef.current;
@@ -284,7 +301,9 @@ const CardNav: React.FC<CardNavProps> = ({
                     className="logo-text tracking-[-0.5px] text-[18px] md:text-[20px]"
                     style={{ color: effectiveMenuColor }}
                   >
-                    {logoText}
+                    <a href="/">
+                      {logoText}
+                    </a>
                   </div>
                 );
               }
@@ -301,8 +320,24 @@ const CardNav: React.FC<CardNavProps> = ({
             type="button"
             className="card-nav-cta-button hidden md:inline-flex border-0 rounded-[calc(0.75rem-0.2rem)] px-4 items-center h-full font-medium cursor-pointer transition-colors duration-300"
             style={{ backgroundColor: effectiveButtonBg, color: effectiveButtonText }}
+            onClick={() => {
+              const targetPath = isInstallPage ? "/" : "/install";
+              router.push(targetPath);
+            }}
           >
-            Get Started
+            <span className="relative overflow-hidden block" style={{ minWidth: '90px' }}>
+              <span
+                className={`absolute inset-0 flex items-center justify-center w-full h-full transition-all duration-500 ${!isInstallPage ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}
+              >
+                Get Started
+              </span>
+              <span
+                className={`absolute inset-0 flex items-center justify-center w-full h-full transition-all duration-500 ${isInstallPage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+              >
+                Home
+              </span>
+              <span className="invisible">Get Started</span>
+            </span>
           </button>
         </div>
 
@@ -325,20 +360,74 @@ const CardNav: React.FC<CardNavProps> = ({
                 {item.label}
               </div>
               <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
-                {item.links?.map((lnk, i) => (
-                  <a
-                    key={`${lnk.label}-${i}`}
-                    className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
-                    href={lnk.href}
-                    aria-label={lnk.ariaLabel}
-                  >
-                    <GoArrowUpRight
-                      className="nav-card-link-icon shrink-0"
-                      aria-hidden="true"
-                    />
-                    {lnk.label}
-                  </a>
-                ))}
+                {item.links?.map((lnk, i) => {
+                  const isInternal = lnk.href.startsWith("/");
+                  const isAnchor = lnk.href.startsWith("#");
+                  const isExternal = !isInternal && !isAnchor;
+                  
+                  if (isInternal || isAnchor) {
+                    return (
+                      <Link
+                        key={`${lnk.label}-${i}`}
+                        className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                        href={lnk.href}
+                        aria-label={lnk.ariaLabel}
+                        onClick={(e) => {
+                          // Handle hash navigation for smooth scrolling
+                          if (lnk.href.includes('#')) {
+                            const [path, hash] = lnk.href.split('#');
+                            const targetPath = path || '/';
+                            
+                            // If we're navigating to a different page with a hash
+                            if (pathname !== targetPath) {
+                              e.preventDefault();
+                              router.push(lnk.href);
+                              // Wait for navigation to complete, then scroll
+                              setTimeout(() => {
+                                const element = document.getElementById(hash);
+                                if (element) {
+                                  element.scrollIntoView({ behavior: 'smooth' });
+                                }
+                              }, 100);
+                            } else if (hash) {
+                              // Same page, just scroll to hash
+                              e.preventDefault();
+                              const element = document.getElementById(hash);
+                              if (element) {
+                                element.scrollIntoView({ behavior: 'smooth' });
+                              }
+                              // Update URL with hash
+                              window.history.pushState({}, '', `#${hash}`);
+                            }
+                          }
+                        }}
+                      >
+                        <GoArrowUpRight
+                          className="nav-card-link-icon shrink-0"
+                          aria-hidden="true"
+                        />
+                        {lnk.label}
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <a
+                        key={`${lnk.label}-${i}`}
+                        className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                        href={lnk.href}
+                        aria-label={lnk.ariaLabel}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {/* <GoArrowUpRight
+                          className="nav-card-link-icon shrink-0"
+                          aria-hidden="true"
+                        /> */}
+                        {lnk.label}
+                      </a>
+                    );
+                  }
+                })}
               </div>
             </div>
           ))}

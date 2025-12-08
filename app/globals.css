@@ -1,3 +1,40 @@
+/* Hide horizontal scrollbar in terminal commands section */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* ElegantExplodeText enhancements */
+.elegant-gradient-text {
+  background: linear-gradient(90deg, #FF6546 0%, #fff 50%, #FF6546 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: elegant-gradient-move 4s linear infinite;
+}
+
+@keyframes elegant-gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.elegant-glow {
+  filter: drop-shadow(0 0 16px #FF6546) drop-shadow(0 0 4px #fff);
+}
+
+.elegant-shimmer {
+  position: relative;
+  animation: elegant-shimmer 2s linear infinite;
+}
+
+@keyframes elegant-shimmer {
+  0% { text-shadow: 0 0 8px #FF6546, 0 0 2px #fff; }
+  50% { text-shadow: 0 0 24px #FF6546, 0 0 8px #fff; }
+  100% { text-shadow: 0 0 8px #FF6546, 0 0 2px #fff; }
+}
 @import "tailwindcss";
 
 :root {
@@ -23,10 +60,86 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Custom scrollbar for desktop - no layout shift, no arrows */
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-button {
+  display: none;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #FF6546;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #FF7560;
+  background-clip: content-box;
+  opacity: 1;
+}
+
+/* Show scrollbar on scroll activity */
+html.scrolling::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+/* Hide scrollbar when scrolling in transition section */
+html.scrolling-hidden::-webkit-scrollbar-thumb {
+  opacity: 0 !important;
+}
+
+/* Hide scrollbar during page transition */
+html.transitioning::-webkit-scrollbar-thumb {
+  opacity: 0 !important;
+}
+
+/* Firefox scrollbar - auto-hide */
+html {
+  scrollbar-color: rgba(255, 101, 70, 0) transparent;
+  scrollbar-width: thin;
+  transition: scrollbar-color 0.3s ease;
+}
+
+html.scrolling-hidden {
+  scrollbar-color: transparent transparent !important;
+}
+
+html.transitioning {
+  scrollbar-color: transparent transparent !important;
+}
+
+html.scrolling {
+  scrollbar-color: #FF6546 transparent;
+}
+
+/* Hide scrollbar on mobile */
+@media (max-width: 768px) {
+  html::-webkit-scrollbar {
+    width: 0;
+  }
+  
+  html {
+    scrollbar-width: none;
+  }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import CardNav, { CardNavItem } from "../Components/CardNav/CardNav";
+import ScrollbarTracker from "../Components/ScrollbarTracker/ScrollbarTracker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +30,10 @@ export default function RootLayout({
       bgColor: "#39171033",
       textColor: "#fff",
       links: [
-        { label: "home", href: "#", ariaLabel: "Home" },
-        { label: "showcase", href: "#showcase", ariaLabel: "Showcase" },
-        { label: "about", href: "#about", ariaLabel: "About" },
-        { label: "features", href: "#features", ariaLabel: "Features" },
+        { label: "home", href: "/", ariaLabel: "Home" },
+        { label: "showcase", href: "/#showcase", ariaLabel: "Showcase" },
+        { label: "about", href: "/#about", ariaLabel: "About" },
+        { label: "features", href: "/#features", ariaLabel: "Features" },
       ],
     },
     {
@@ -40,8 +41,10 @@ export default function RootLayout({
       bgColor: "#78342633",
       textColor: "#fff",
       links: [
-        { label: "getting started", href: "#started", ariaLabel: "Getting Started" },
-        { label: "project structure", href: "#structure", ariaLabel: "Project Structure" },
+        { label: "installation", href: "/install", ariaLabel: "Installation Guide" },
+        { label: "requirements", href: "/install#requirements", ariaLabel: "System Requirements" },
+        { label: "methods", href: "/install#methods", ariaLabel: "Installation Methods" },
+        { label: "troubleshooting", href: "/install#troubleshooting", ariaLabel: "Troubleshooting" },
       ],
     },
     {
@@ -63,6 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ScrollbarTracker />
         <CardNav
           logoText={logoText}
           logoAlt="Company Logo"

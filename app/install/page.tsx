@@ -183,7 +183,7 @@ docker run -it edosh`,
   if (!mounted) return null;
 
   return (
-    <div className="overflow-x-hidden bg-black text-white">
+    <div className="overflow-x-hidden bg-[#0a0a0a] text-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-32">
         <div className="max-w-4xl mx-auto text-center space-y-6">

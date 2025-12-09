@@ -151,7 +151,7 @@ export default function Home() {
           />
         </div>
       {/* gradient overlay between background beams and content */}
-      <div className="absolute inset-0 z-10 pointer-events-none bg-linear-to-b from-transparent to-black" />
+      <div className="absolute inset-0 z-10 pointer-events-none bg-linear-to-b from-transparent to-[#0a0a0a]" />
         <div className="z-20 p-4 md:p-8 flex flex-col items-center justify-center text-center w-full max-w-full">
           <BlurText
             text="edosh"
@@ -411,7 +411,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at center, transparent 0%, black 100%)',
+            background: 'radial-gradient(circle at center, transparent 0%, #0a0a0a 100%)',
             opacity: transitionProgress * 0.6
           }}
         />
@@ -463,7 +463,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 pointer-events-none overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #FF6546 0%, #000 100%)',
+            background: 'linear-gradient(135deg, #FF6546 0%, #0a0a0a 100%)',
             opacity: Math.max(0, transitionProgress - 0.5) * 2,
             maxWidth: '100vw',
             width: '100%'

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 
 export interface BentoCardProps {
   color?: string;
@@ -31,7 +32,7 @@ const MOBILE_BREAKPOINT = 768;
 
 const cardData: Array<BentoCardProps & { type?: string; extra?: any }> = [
   {
-    color: "#000",
+    color: "#0a0a0a",
     title: "Educational Mode",
     description: "Built-in tutorials and contextual tips help students learn Linux commands naturally",
     label: "Educational",
@@ -42,7 +43,7 @@ const cardData: Array<BentoCardProps & { type?: string; extra?: any }> = [
     },
   },
   {
-    color: "#000",
+    color: "#0a0a0a",
     title: "Smart Autocomplete",
     description: "Tab completion for commands, files, and directories",
     label: "Autocomplete",
@@ -52,26 +53,23 @@ const cardData: Array<BentoCardProps & { type?: string; extra?: any }> = [
     },
   },
     {
-    color: "#000",
+    color: "#0a0a0a",
     title: "Smart Git Status",
-    description: "Real-time repository information in your prompt",
+    description: "",
     label: "Git",
     type: "medium",
-    extra: {
-      path: "/repo",
-      branch: "(main ↑2 +3 ~1)",
-    },
+    extra: {},
   },
   {
-    color: "#000",
+    color: "#0a0a0a",
     title: "Code Runner",
-    description: "Compile & run C/C++, Python, Java",
+    description: "",
     label: "Runner",
     type: "tall",
-    extra: { code: "$ run hello.c" },
+    extra: {},
   },
   {
-    color: "#000",
+    color: "#0a0a0a",
     title: "Interactive Tutorials",
     description: "4 comprehensive lessons covering Linux fundamentals",
     label: "Tutorials",
@@ -79,7 +77,7 @@ const cardData: Array<BentoCardProps & { type?: string; extra?: any }> = [
     extra: { steps: ["1. Directories", "2. Navigation", "3. Files", "4. Getting Help"] },
   },
   {
-    color: "#000",
+    color: "#0a0a0a",
     title: "Command Explanations",
     description: "Short, useful explanations for common commands",
     label: "Explain",
@@ -610,7 +608,7 @@ const MagicBento: React.FC<BentoProps> = ({
             --glow-radius: 200px;
             --glow-color: ${glowColor};
             --border-color: #333;
-            --background-dark: #000;
+            --background-dark: #0a0a0a;
             --white: hsl(0, 0%, 100%);
             --purple-primary: rgba(132, 0, 255, 1);
             --purple-glow: rgba(132, 0, 255, 0.2);
@@ -798,22 +796,37 @@ const MagicBento: React.FC<BentoProps> = ({
                           <h3 className={`card__title font-normal text-base m-0 mb-1 ${
                             textAutoHide ? "text-clamp-1" : ""
                           }`}>{card.title}</h3>
-                          <p className={`card__description text-xs leading-5 opacity-90 ${
-                            textAutoHide ? "text-clamp-2" : ""
-                          }`}>{card.description}</p>
-                          {card.extra?.path && (
-                            <div className="terminal-preview mt-3 text-sm">
-                              <span className="path mr-2">{card.extra.path}</span>
-                              <span className="git-branch mr-2">{card.extra.branch}</span>
-                              <span className="prompt"> &gt; </span>
+                          {card.title === "Smart Git Status" ? (
+                            <div className="mt-3 rounded-lg overflow-hidden">
+                              <Image 
+                                src="/images/git.jpg" 
+                                alt="Smart Git Status"
+                                width={400}
+                                height={300}
+                                className="w-full h-auto object-cover"
+                                loading="lazy"
+                              />
                             </div>
-                          )}
-                          {card.extra?.list && (
-                            <ul className="mt-2 list-disc ml-4 text-sm">
-                              {card.extra.list.map((it: string, i: number) => (
-                                <li key={i}>{it}</li>
-                              ))}
-                            </ul>
+                          ) : (
+                            <>
+                              <p className={`card__description text-xs leading-5 opacity-90 ${
+                                textAutoHide ? "text-clamp-2" : ""
+                              }`}>{card.description}</p>
+                              {card.extra?.path && (
+                                <div className="terminal-preview mt-3 text-sm">
+                                  <span className="path mr-2">{card.extra.path}</span>
+                                  <span className="git-branch mr-2">{card.extra.branch}</span>
+                                  <span className="prompt"> &gt; </span>
+                                </div>
+                              )}
+                              {card.extra?.list && (
+                                <ul className="mt-2 list-disc ml-4 text-sm">
+                                  {card.extra.list.map((it: string, i: number) => (
+                                    <li key={i}>{it}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </>
                           )}
                         </div>
                       </>
@@ -853,7 +866,7 @@ const MagicBento: React.FC<BentoProps> = ({
                           }`}>{card.description}</p>
                           <div className="tutorial-steps mt-3 flex flex-wrap gap-2 text-sm">
                             {card.extra?.steps?.map((s: string, i: number) => (
-                              <span key={i} className="px-2 py-1 bg-black/20 rounded">{s}</span>
+                              <span key={i} className="px-2 py-1 bg-[#0a0a0a]/20 rounded">{s}</span>
                             ))}
                           </div>
                         </div>
@@ -869,8 +882,25 @@ const MagicBento: React.FC<BentoProps> = ({
                           <h3 className={`card__title font-normal text-base m-0 mb-1 ${
                             textAutoHide ? "text-clamp-1" : ""
                           }`}>{card.title}</h3>
-                          <code className="mt-2 block text-sm">{card.extra?.code}</code>
-                          <div className="explanation-preview mt-3 text-sm whitespace-pre-wrap">{card.extra?.explanation}</div>
+                          {card.title === "Code Runner" ? (
+                            <div className="mt-3 rounded-lg overflow-hidden">
+                              <Image 
+                                src="/images/coderunner.jpg" 
+                                alt="Code Runner"
+                                width={400}
+                                height={300}
+                                className="w-full h-auto object-cover"
+                                loading="lazy"
+                              />
+                            </div>
+                          ) : (
+                            <>
+                              <code className="mt-2 block text-sm">{card.extra?.code}</code>
+                              {card.extra?.explanation && (
+                                <div className="explanation-preview mt-3 text-sm whitespace-pre-wrap">{card.extra?.explanation}</div>
+                              )}
+                            </>
+                          )}
                         </div>
                       </>
                     );

@@ -1,13 +1,11 @@
 "use client"
 import Beams from "@/Backgrounds/Beams/Beams";
-import ElegantExplodeText from "@/Components/ElegantExplodeText/ElegantExplodeText";
 import BlurText from "@/TextAnimations/BlurText/BlurText";
 import BlurButton from "@/Components/Buttons/blur";
 import ActionButton from "@/Components/Buttons/action";
 import { GoArrowUpRight } from "react-icons/go";
 import AnimatedContent from "@/Animations/AnimatedContent/AnimatedContent";
 import MagicBento from "@/Components/MagicBento/MagicBento";
-import ScrollReveal from "@/TextAnimations/ScrollReveal";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -311,7 +309,7 @@ export default function Home() {
                     alt="Educational features"
                     className="w-full h-auto transition-transform duration-500 group-hover:scale-101"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
               <div className="order-1 md:order-2 space-y-4">
@@ -355,7 +353,7 @@ export default function Home() {
                     alt="Technical features"
                     className="w-full h-auto transition-transform duration-500 group-hover:scale-101"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
             </div>
@@ -381,7 +379,7 @@ export default function Home() {
                     alt="Developer features"
                     className="w-full h-auto transition-transform duration-500 group-hover:scale-101"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
               <div className="order-1 md:order-2 space-y-4">

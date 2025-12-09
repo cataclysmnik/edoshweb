@@ -380,7 +380,7 @@ docker run -it edosh`,
                     </button>
                   </div>
                 </div>
-                <pre className="font-mono text-sm text-zinc-300 whitespace-pre-wrap break-words flex-1 no-scrollbar" style={{overflowX: 'hidden'}}>
+                <pre className="font-mono text-sm text-zinc-300 whitespace-pre-wrap wrap-break-word flex-1 no-scrollbar" style={{overflowX: 'hidden'}}>
                   {installMethods[activeTab].code}
                 </pre>
               </div>

@@ -264,16 +264,16 @@ const CardNav: React.FC<CardNavProps> = ({
 
   return (
     <div
-      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-[99] top-[1.2em] md:top-[2em] backdrop-blur-xl bg-black/30 ${className}`}
+      className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-99 top-[1.2em] md:top-[2em] backdrop-blur-xl bg-[#0a0a0a]/30 ${className}`}
     >
       <nav
         ref={navRef}
         className={`card-nav ${isExpanded ? "open" : ""} block h-[60px] p-0 rounded-xl shadow-md relative overflow-hidden will-change-[height]`}
         style={navInlineStyle}
       >
-        <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-[2]">
+        <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex items-center justify-between p-2 pl-[1.1rem] z-2">
           <div
-            className={`hamburger-menu ${isHamburgerOpen ? "open" : ""} group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
+            className={`hamburger-menu ${isHamburgerOpen ? "open" : ""} group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-2 md:order-0`}
             onClick={toggleMenu}
             role="button"
             aria-label={isExpanded ? "Close menu" : "Open menu"}
@@ -281,18 +281,18 @@ const CardNav: React.FC<CardNavProps> = ({
             style={{ color: effectiveMenuColor }}
           >
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-all duration-300 ease-in-out [transform-origin:center] ${
+              className={`hamburger-line w-[30px] h-0.5 bg-current transition-all duration-300 ease-in-out origin-center ${
                 isHamburgerOpen ? "translate-y-[5px] rotate-45" : ""
               } group-hover:opacity-75`}
             />
             <div
-              className={`hamburger-line w-[30px] h-[2px] bg-current transition-all duration-300 ease-in-out [transform-origin:center] ${
+              className={`hamburger-line w-[30px] h-0.5 bg-current transition-all duration-300 ease-in-out origin-center ${
                 isHamburgerOpen ? "-translate-y-[5px] -rotate-45" : ""
               } group-hover:opacity-75`}
             />
           </div>
 
-          <div className="logo-container flex items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-none">
+          <div className="logo-container flex items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-0">
             {/** If logoText is provided, render text instead of the image. */}
             {(() => {
               if ((logoText as string | undefined) && logoText?.length) {
@@ -309,7 +309,7 @@ const CardNav: React.FC<CardNavProps> = ({
               }
 
               if (logo) {
-                return <img src={logo} alt={logoAlt} className="logo h-[28px]" />;
+                return <img src={logo} alt={logoAlt} className="logo h-7" />;
               }
 
               return null;
@@ -342,11 +342,11 @@ const CardNav: React.FC<CardNavProps> = ({
         </div>
 
         <div
-          className={`card-nav-content absolute left-0 right-0 top-[60px] bottom-0 p-2 flex flex-col items-stretch gap-2 justify-start z-[1] ${
+          className={`card-nav-content absolute left-0 right-0 top-[60px] bottom-0 p-2 flex flex-col items-stretch gap-2 justify-start z-1 ${
             isExpanded
               ? "visible pointer-events-auto"
               : "invisible pointer-events-none"
-          } md:flex-row md:items-end md:gap-[12px]`}
+          } md:flex-row md:items-end md:gap-3`}
           aria-hidden={!isExpanded}
         >
           {(items || []).slice(0, 3).map((item, idx) => (
@@ -359,7 +359,7 @@ const CardNav: React.FC<CardNavProps> = ({
               <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
                 {item.label}
               </div>
-              <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
+              <div className="nav-card-links mt-auto flex flex-col gap-0.5">
                 {item.links?.map((lnk, i) => {
                   const isInternal = lnk.href.startsWith("/");
                   const isAnchor = lnk.href.startsWith("#");
@@ -369,7 +369,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     return (
                       <Link
                         key={`${lnk.label}-${i}`}
-                        className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                        className="nav-card-link inline-flex items-center gap-1.5 no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
                         href={lnk.href}
                         aria-label={lnk.ariaLabel}
                         onClick={(e) => {
@@ -413,7 +413,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     return (
                       <a
                         key={`${lnk.label}-${i}`}
-                        className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                        className="nav-card-link inline-flex items-center gap-1.5 no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
                         href={lnk.href}
                         aria-label={lnk.ariaLabel}
                         target="_blank"
